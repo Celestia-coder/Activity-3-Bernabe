@@ -1,7 +1,15 @@
+using Activity3.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register the DB that we are using
+builder.Services.AddDbContext<FormDbContext>(options =>
+    options.UseInMemoryDatabase("FormDb")
+);
 
 var app = builder.Build();
 
