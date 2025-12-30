@@ -4,7 +4,9 @@ namespace Activity3.Models
 {
     public class Form
     {
-        public string? Name { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string? Username { get; set; }
 
         [Required]
         public string? Character { get; set; }
