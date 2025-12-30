@@ -1,72 +1,119 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 
 @model Activity3.Models.Form
 
-<div class="container">
-    <div class="row">
-        <div class="col">
+<div class="container-fluid p-0">
+
+    @* ======== HEADER ======= *@
+    
+    <div class="header">
+        <div class="header-content">
             <h1 class="display-4">Love and Deepspace Fan Website</h1>
             <p>A fan-made website built using C# MVC to explore front-end development.</p>
             <button type="button" class="btn btn-primary">Explore Characters</button>
         </div>
-        <div class="col">INSERT IMAGE</div>
-    </div>
-</div>
-
-<form asp-action="FanInteractionForm" asp-controller="Home">
-
-    <div class="mb-3">
-        <label for="Name" class="form-label">Name</label>
-        <input class="form-control" type="text" placeholder="Zayne_simp" asp-for="Name" />
+        <img src="https://webstatic.infoldgames.com/9c407203749ae32d/activity/images/KkZUpQ6nJm4ECvhy.jpg"
+             class="header-img" alt="Love and Deepspace">
     </div>
 
-    <div class="mb-3">
-        <label for="Character" class="form-label">Favorite Character</label>
-        <select id="inputState" class="form-select" asp-for="Character">
-            <option selected>choose...</option>
-            <option value="Xavier">Xavier</option>
-            <option value="Zayne">Zayne</option>
-            <option value="Rafayel">Rafayel</option>
-            <option value="Sylus">Sylus</option>
-            <option value="Caleb">Caleb</option>
-        </select>
-    </div>
+    @* ======== CHARACTERS ======= *@
+    <div class="char-container">
+        <h2>Characters</h2>
+        <div class="char-section">
+            <div class="card">
+                <img src="https://assets.papegames.com/nikkiweb/papegame/deepspaceen/material/20250103/ef75d0c79ee6654fbcc62f68cabd116a.jpeg"
+                     class="char-card-img" alt="Xavier">
+                <div class="card-body">
+                    <h5 class="card-title">Xavier</h5>
+                    <p class="card-text">A mysterious Deepspace Hunter with a sleepy gaze. He wields the Evol of Light with unmatched precision.</p>
+                    <a href="https://loveanddeepspace.infoldgames.com/en-EN/home#1" class="btn-profile">Profile Details</a>
+                </div>
+            </div>
 
-    <div class="mb-3">
-        <label for="MessageText" class="form-label">Why do you like this character?</label>
-        <textarea class="form-control" rows="3" asp-for="MessageText"></textarea>
-    </div>
+            <div class="card">
+                <img src="https://assets.papegames.com/nikkiweb/papegame/deepspaceen/material/20250103/bcb449582bbd0dc174a040975353bfee.jpeg"
+                     class="char-card-img" alt="Zayne">
+                <div class="card-body">
+                    <h5 class="card-title">Zayne</h5>
+                    <p class="card-text">A genius cardiac surgeon known for his icy demeanor. His frost Evol matches his calm, calculated approach.</p>
+                    <a href="https://loveanddeepspace.infoldgames.com/en-EN/home#1" class="btn-profile">Profile Details</a>
+                </div>
+            </div>
 
+            <div class="card">
+                <img src="https://assets.papegames.com/nikkiweb/papegame/deepspaceen/material/20250103/6a4057e0407ce4bee73d2e2be807a3e1.jpeg"
+                     class="char-card-img" alt="Rafayel">
+                <div class="card-body">
+                    <h5 class="card-title">Rafayel</h5>
+                    <p class="card-text">A passionate artist whose works are as vibrant as his personality. He hides a deep connection to Lemuria.</p>
+                    <a href="https://loveanddeepspace.infoldgames.com/en-EN/home#1" class="btn-profile">Profile Details</a>
+                </div>
+            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Rating (1 - lowest, 5 - highest)</label>
-        <div class="container">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" asp-for="Rating">
-                <label class="form-check-label" for="inlineRadio1">1</label>
+            <div class="card">
+                <img src="https://assets.papegames.com/nikkiweb/papegame/deepspaceen/material/20250103/46a7da01b2a0c69f9568ca647e5d1a62.jpeg"
+                     class="char-card-img" alt="Sylus">
+                <div class="card-body">
+                    <h5 class="card-title">Sylus</h5>
+                    <p class="card-text">The dangerous leader of Onychinus. He values strength and commands a power that few dare to challenge.</p>
+                    <a href="https://loveanddeepspace.infoldgames.com/en-EN/home#1" class="btn-profile">Profile Details</a>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" asp-for="Rating">
-                <label class="form-check-label" for="inlineRadio2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" asp-for="Rating">
-                <label class="form-check-label" for="inlineRadio3">3</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" asp-for="Rating">
-                <label class="form-check-label" for="inlineRadio2">4</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5" asp-for="Rating">
-                <label class="form-check-label" for="inlineRadio5">5</label>
+
+            <div class="card">
+                <img src="https://assets.papegames.com/nikkiweb/papegame/deepspaceen/material/20250127/f39a0633d1c4e2f1eea123b2099128e8.jpg"
+                     class="char-card-img" alt="Caleb">
+                <div class="card-body">
+                    <h5 class="card-title">Caleb</h5>
+                    <p class="card-text">Your supportive childhood friend and a skilled pilot. His presence provides a sense of home amidst the chaos.</p>
+                    <a href="https://loveanddeepspace.infoldgames.com/en-EN/home#1" class="btn-profile">Profile Details</a>
+                </div>
             </div>
         </div>
     </div>
 
+    @* ======== FORM ======= *@
+    <div class="form-container">
+        <h2>Fan Interaction</h2>
+        <form asp-action="FanInteractionForm" asp-controller="Home" class="form-card mx-auto" style="max-width: 600px;">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input class="form-control" type="text" placeholder="Sunshine_18" asp-for="Username" />
+            </div>
 
+            <div class="mb-3">
+                <label class="form-label">Favorite Character</label>
+                <select class="form-select" asp-for="Character">
+                    <option selected disabled>Choose...</option>
+                    <option value="Xavier">Xavier</option>
+                    <option value="Zayne">Zayne</option>
+                    <option value="Rafayel">Rafayel</option>
+                    <option value="Sylus">Sylus</option>
+                    <option value="Caleb">Caleb</option>
+                </select>
+            </div>
 
-    <button class="btn btn-primary mt-4" type="submit"> Submit </button>
-</form>
+            <div class="mb-3">
+                <label class="form-label">Why do you like this character?</label>
+                <textarea class="form-control" rows="3" asp-for="MessageText"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Rating (1 - lowest, 5 - highest)</label>
+                <div class="d-flex gap-3">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Rating" value="@i" />
+                            <label class="form-check-label">@i</label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-2" type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
