@@ -1,4 +1,4 @@
-using Activity3.Models;
+using Activity3.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register the DB that we are using
-builder.Services.AddDbContext<FormDbContext>(options =>
-    options.UseInMemoryDatabase("FormDb")
-);
+// Register the DB that we are using AKA Database Injection
+// Define full connection string
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
