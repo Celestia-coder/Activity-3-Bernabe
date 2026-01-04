@@ -2,18 +2,13 @@
 
 namespace Activity3.Models
 {
-    public class Form
+    public class FormViewModel
     {
-        [Key]
-        public int Id { get; set; }
         public string? Username { get; set; }
 
         [Required]
         public string? Character { get; set; }
         public string? MessageText { get; set; }
         public int? Rating { get; set; }
-
-
-
     }
 }
