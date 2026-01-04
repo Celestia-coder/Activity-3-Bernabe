@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
 }
 
-@model Activity3.Models.Form
+@model Activity3.Models.FormViewModel
 
 <div class="container-fluid p-0">
 
@@ -77,7 +77,7 @@
     @* ======== FORM ======= *@
     <div class="form-container">
         <h2>Fan Interaction</h2>
-        <form asp-action="FanInteractionForm" asp-controller="Home" class="form-card mx-auto" style="max-width: 600px;">
+        <form method="post" asp-controller="Home" class="form-card mx-auto" style="max-width: 600px;">
             <div class="mb-3">
                 <label class="form-label">Username</label>
                 <input class="form-control" type="text" placeholder="Sunshine_18" asp-for="Username" />
