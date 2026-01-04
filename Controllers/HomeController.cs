@@ -1,57 +1,70 @@
+using Activity3.Data;
 using Activity3.Models;
+using Activity3.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Activity3.Controllers
 {
+    // Controller that handles home-related pages and actions
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly FormDbContext _context;
+        // DbContext used to access the database
+        private readonly ApplicationDbContext dbContext;
 
-        // Inject DbContext into HomeController
-        public HomeController(ILogger<HomeController> logger, FormDbContext context)
+        // Constructor injection: gives the controller access to the database
+        public HomeController(ApplicationDbContext dbContext)
         {
-            _logger = logger;
-            _context = context;
+            this.dbContext = dbContext;
         }
 
-        // Display Home page (with form)
+        // GET: Displays the home page with the form
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(); // Loads Index.cshtml
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        // POST: Handles form submission from the home page
         [HttpPost]
-        public IActionResult FanInteractionForm(Form model)
+        public async Task<IActionResult> Index(FormViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            // Convert the ViewModel into a Form entity
+            var form = new Form
             {
-                // Return user back to the form if validation fails
-                return View("Index", model);
-            }
+                Username = viewModel.Username,
+                Character = viewModel.Character,
+                MessageText = viewModel.MessageText,
+                Rating = viewModel.Rating
+            };
+ 
+            await dbContext.Forms.AddAsync(form);  // Add the new form data to the database
+            await dbContext.SaveChangesAsync();    // Save changes to the database
 
-            _context.Forms.Add(model);
-            _context.SaveChanges();
-            return RedirectToAction("Forms");
+            return View();   // Reload the same page after saving
         }
 
-        // Display all submitted forms
-        public IActionResult Forms()
+        // GET: Displays the list of submitted forms
+        [HttpGet]
+        public async Task<IActionResult> FormList()
         {
-            var allForms = _context.Forms.ToList();
-            return View(allForms);
+            // Get all records from the Forms table
+            var forms = await dbContext.Forms.ToListAsync();
+
+            // Pass the list to the FormList view
+            return View(forms);
         }
 
+        // Handles error pages and disables caching
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Shows error details when something goes wrong
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }
