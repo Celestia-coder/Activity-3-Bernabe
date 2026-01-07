@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Forms";
+    ViewData["Title"] = "Forms List";
 }
 
 @model List<Activity3.Models.Entities.Form>
@@ -36,6 +36,9 @@
                         <td>@form.Rating</td>
                         <td>
                             <a class="btn btn-primary" asp-controller="Home" asp-action="EditForm" asp-route-id="@form.Id">Edit</a>
+                            <a class="btn btn-danger mt-2" asp-controller="Home" asp-action="DeleteForm" asp-route-id="@form.Id">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 }
