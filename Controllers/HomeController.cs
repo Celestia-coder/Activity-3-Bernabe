@@ -30,6 +30,11 @@ namespace Activity3.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(FormViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             // Convert the ViewModel into a Form entity
             var form = new Form
             {
@@ -42,7 +47,7 @@ namespace Activity3.Controllers
             await dbContext.Forms.AddAsync(form);  // Add the new form data to the database
             await dbContext.SaveChangesAsync();    // Save changes to the database
 
-            return View();   // Reload the same page after saving
+            return RedirectToAction("Index");
         }
 
         // GET: Displays the list of submitted forms
