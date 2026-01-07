@@ -85,6 +85,22 @@ namespace Activity3.Controllers
             return RedirectToAction("FormList", "Home");
         }
 
+        //// Delete entries in the form list
+        [HttpGet]
+        public async Task<IActionResult> DeleteForm(Guid id)
+        {
+            var form = await dbContext.Forms.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (form is not null)
+            {
+                dbContext.Forms.Remove(form);
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("FormList", "Home");
+        }
+
         // Handles error pages and disables caching
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
