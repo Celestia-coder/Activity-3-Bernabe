@@ -197,8 +197,9 @@ h2 {
 
 .form-list-container {
     background-color: whitesmoke;
-    height: 100vh;
+    height: 100%;
     text-align: center;
+    padding-bottom: 30px;
 }
 
 .form-list-header{

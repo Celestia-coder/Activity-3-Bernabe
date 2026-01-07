@@ -4,24 +4,25 @@
 
 @model List<Activity3.Models.Entities.Form>
 
-<div class="container-fluid p-0 form-list-container">
-    <div class="form-list-header">
-        <h1 class="display-5">Forms</h1>
-        <p>This is a list of all the respondents</p>
-        <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Vote</a>
-        <br />
-    </div>
+<div class="container-fluid p-0">
+    <div class="form-list-container min-vh-100">
+        <div class="form-list-header">
+            <h1 class="display-5">Forms</h1>
+            <p>This is a list of all the respondents</p>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Vote</a>
+            <br />
+        </div>
 
-    <table class="table table-card table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Favorite Character</th>
-                <th>Message</th>
-                <th>Rating</th>
-            </tr>
-        </thead>
+        <table class="table table-card table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Favorite Character</th>
+                    <th>Message</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
 
         <tbody>
             @{
@@ -33,6 +34,9 @@
                         <td>@form.Character</td>
                         <td>@form.MessageText</td>
                         <td>@form.Rating</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="EditForm" asp-route-id="@form.Id">Edit</a>
+                        </td>
                     </tr>
                 }
             }

@@ -30,6 +30,11 @@ namespace Activity3.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(FormViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             // Convert the ViewModel into a Form entity
             var form = new Form
             {
@@ -42,7 +47,7 @@ namespace Activity3.Controllers
             await dbContext.Forms.AddAsync(form);  // Add the new form data to the database
             await dbContext.SaveChangesAsync();    // Save changes to the database
 
-            return View();   // Reload the same page after saving
+            return RedirectToAction("Index");
         }
 
         // GET: Displays the list of submitted forms
@@ -54,6 +59,51 @@ namespace Activity3.Controllers
 
             // Pass the list to the FormList view
             return View(forms);
+        }
+
+
+        // Edit entries in the form
+        [HttpGet]
+        public async Task<IActionResult> EditForm(Guid id)
+        {
+            var form = await dbContext.Forms.FindAsync(id);
+
+            return View(form);
+        }
+
+        // Get updated entries from the form
+        [HttpPost]
+        public async Task<IActionResult> EditForm(Form viewModel)
+        {
+            var form = await dbContext.Forms.FindAsync(viewModel.Id);
+
+            if (form is not null)
+            {
+                form.Username = viewModel.Username;
+                form.Character = viewModel.Character;
+                form.MessageText = viewModel.MessageText;
+                form.Rating = viewModel.Rating;
+
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("FormList", "Home");
+        }
+
+        //// Delete entries in the form list
+        [HttpGet]
+        public async Task<IActionResult> DeleteForm(Guid id)
+        {
+            var form = await dbContext.Forms.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (form is not null)
+            {
+                dbContext.Forms.Remove(form);
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("FormList", "Home");
         }
 
         // Handles error pages and disables caching
